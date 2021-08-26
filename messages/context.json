@@ -1,5 +1,6 @@
 {
-  "admin-example.navigation.label": "Example admin",
+  "admin-example.navigation.label": "Matcher",
   "admin-example.hello-world": "",
-  "appframe.navigation.example": ""
+  "appframe.navigation.example": "",
+  "matcher.summary.join-action": "Join Products"
 }

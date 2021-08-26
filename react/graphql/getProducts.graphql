@@ -1,0 +1,22 @@
+query getProducts($query: String) {
+    products(query: $query) @context(provider: "vtex.search-graphql") {
+        productId,
+        productName,
+        items {
+            itemId
+            ean
+            
+            images {
+              imageUrl
+            }
+            sellers {
+                sellerId,
+                sellerName,
+                commertialOffer {
+                  Price
+                  AvailableQuantity
+                }
+            }
+        }
+      }
+}

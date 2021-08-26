@@ -5,6 +5,7 @@ import getDocuments from '../graphql/getDocuments.graphql';
 import { documentsSerializer } from '../utils/serializer';
 
 const useInitialState = () => {
+
   const { data, loading, error } = useQuery(getDocuments, {
     variables: {
       acronym: "PR",

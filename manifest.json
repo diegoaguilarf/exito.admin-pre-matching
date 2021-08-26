@@ -11,7 +11,9 @@
   "dependencies": {
     "vtex.styleguide": "9.x",
     "vtex.store-graphql": "2.x",
-    "vtex.render-runtime": "8.x"
+    "vtex.render-runtime": "8.x",
+    "vtex.search-graphql": "0.x",
+    "vtex.suggestions-graphql": "10.x"
   },
   "builders": {
     "react": "3.x",

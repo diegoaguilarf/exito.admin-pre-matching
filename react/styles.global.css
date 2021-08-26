@@ -6,3 +6,7 @@ body,
 .render-provider {
   height: 100%;
 }
+
+.product_item__image {
+  object-fit: contain;
+}

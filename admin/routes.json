@@ -1,6 +1,10 @@
 {
   "admin.app.productslist": {
-    "component": "ProductsList",
-    "path": "/admin/app/productslist"
+    "component": "Matcher",
+    "path": "/admin/app/matcher"
+  },
+  "admin.app.matcherSummary": {
+    "component": "Summary",
+    "path": "/admin/app/matcher-summary"
   }
 }

@@ -1,0 +1,29 @@
+query getSuggestion ($searchInput: SearchInput!) {
+  searchSuggestions (searchInput: $searchInput) @context(provider: "vtex.suggestions-graphql") {
+    data {
+      sellerId
+      latestVersionId
+      itemId
+      content {
+        idSkuSeller
+        skuName
+        eans
+        refId
+        height
+        width
+        images {
+          imageUrl
+        }
+      }
+      matches {
+        matchId
+        score
+        sku {
+          unitMultiplier
+          measurementUnit
+          specifications
+        }
+      }
+    }
+  }
+}
