@@ -8,7 +8,12 @@ const Product: FC<ProductProps> = ({ data }) => {
         <div className="f3 tc pa7">
             <p>ID: {data.productId}</p>
             <p>{data.productName}</p>
-            <p>vendido por: {data.items[0].sellers[0].sellerName}</p>
+            <p>vendido por:</p>
+            <ul>
+                {data.items[0].sellers.map((seller) => <li>
+                    <p>{seller.sellerName}</p>
+                </li>)}
+            </ul>
         </div>
     </div>)
 }

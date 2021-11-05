@@ -1,4 +1,5 @@
 {
   "products-list.navigation.label": "Matcher",
-  "matcher.summary.join-action": "Unir Productos"
+  "matcher.summary.join-action": "Unir Productos",
+  "matcher.summary.back-action": "Volver Atras"
 }

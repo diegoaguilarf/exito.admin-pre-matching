@@ -1,29 +1,36 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { PageBlock, Input } from 'vtex.styleguide';
+import debounce from "lodash.debounce"
 import Select from "../components/Select";
 import Product from "../components/Product";
-import useSearch from "../hooks/useSearch.js"
 import useStorage from "../hooks/useStorage.js"
+import { productSearch } from "../api"
 
 const SelectMain: FC = () => {
 
-    const { products, getProducts } = useSearch();
     const { setMatcherState } = useStorage();
 
     const [search, setSearch] = useState("");
+    const [products, setProducts] = useState([]);
 
     const handleSelected = (selected) => {
-        console.log("handleSelected 1", selected);
         setMatcherState({ mainProduct: selected[0] });
     }
 
     const handleSearchInput = (e) => {
+        debouncedGetProducts(e.target.value);
         setSearch(e.target.value);
     }
 
-    useEffect(() => {
-        getProducts({ query: search });
-    }, [search])
+
+    const getProducts = async (searchValue) => {
+        const { success, data } = await productSearch({ search: searchValue });
+        if (success) {
+            setProducts(data)
+        }
+    }
+
+    const debouncedGetProducts = useCallback(debounce((searchValue) => getProducts(searchValue), 1500), []);
 
     return (<PageBlock>
         <div>
@@ -43,9 +50,9 @@ const SelectMain: FC = () => {
             />
             <div className="pa5 flex flex-wrap justify-start">
                 <Select
-                    items={products} 
-                    itemComponent={Product} 
-                    identifier="productId" 
+                    items={products}
+                    itemComponent={Product}
+                    identifier="productId"
                     onSelected={handleSelected}
                 />
             </div>

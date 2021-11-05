@@ -2,5 +2,6 @@
   "admin-example.navigation.label": "Matcher",
   "admin-example.hello-world": "",
   "appframe.navigation.example": "",
-  "matcher.summary.join-action": "Join Products"
+  "matcher.summary.join-action": "Join Products",
+  "matcher.summary.back-action": "Go Back"
 }

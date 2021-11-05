@@ -1,28 +1,34 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState, useCallback } from "react";
 import { PageBlock, Input } from 'vtex.styleguide';
+import debounce from "lodash.debounce"
 import Select from "../components/Select";
 import Product from "../components/Product";
-import useSearch from "../hooks/useSearch.js"
 import useStorage from "../hooks/useStorage.js"
+import { productSearch } from "../api"
 
 const SelectOffers: FC = () => {
 
-    const { products, getProducts } = useSearch();
     const { setMatcherState } = useStorage();
+    const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
 
     const handleSelected = (selected) => {
-        console.log("handleSelected 2", selected);
-        setMatcherState({ multiOffers: selected[0] });
+        setMatcherState({ multiOffers: selected });
     }
 
     const handleSearchInput = (e) => {
+        debouncedGetProducts(e.target.value);
         setSearch(e.target.value);
     }
 
-    useEffect(() => {
-        getProducts({ query: search });
-    }, [search])
+    const getProducts = async (searchValue) => {
+        const { success, data } = await productSearch({ search: searchValue });
+        if (success) {
+            setProducts(data)
+        }
+    }
+
+    const debouncedGetProducts = useCallback(debounce((searchValue) => getProducts(searchValue), 1500), []);
 
     return (
         <PageBlock>
@@ -46,7 +52,7 @@ const SelectOffers: FC = () => {
                         items={products} 
                         itemComponent={Product} 
                         identifier="productId" 
-                        multiple={false}
+                        multiple={true}
                         onSelected={handleSelected} 
                     />
                 </div>
